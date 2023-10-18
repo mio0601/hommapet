@@ -1,0 +1,6 @@
+<h1>ハムスターの投稿一覧</h1>
+<% @tweets.each do |t| %>
+  <% if t.category == "hamster" %>  
+  <p>内容:<%= t.content %></p>
+  <% end %>
+<% end %>

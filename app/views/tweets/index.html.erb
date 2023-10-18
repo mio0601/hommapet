@@ -1,0 +1,65 @@
+<link rel="stylesheet" type="text/css" href="stylesheets/tea.scss">
+
+<div class="cover-index">
+<div class="container">
+<div class="row justify-content-center">
+
+<h1>hommapet</h1>
+
+<div class="one-post">
+
+<%= link_to "ログイン", tweets_path %>
+<%= link_to "新規登録", new_user_registration_path %>
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>  
+<h3>一覧ページ</h3>
+<%= link_to "新規投稿へ", new_tweet_path %>
+
+<div class="tweets-container">
+  <% @tweets.each do |t| %>
+    <div class="tweet">
+    <%= t.user.email %>
+    <%= image_tag t.image_url %>
+    <%= t.body %>
+    
+    <% if user_signed_in? %>
+    <% if current_user.already_liked?(t) %>
+        <%= button_to tweet_like_path(id: t.id, tweet_id: t.id), method: :delete do %>
+            <p>いいねを取り消す</p><%= t.likes.count %>
+        <% end %>
+    <% else %>
+        <%= button_to tweet_likes_path(id: t.id, tweet_id: t.id), method: :post do %>
+            <p>いいね</p><%= t.likes.count %>
+        <% end %>
+    <% end %>
+<% else %>
+    <p>いいねの数 = </p><%= t.likes.count %>
+<% end %>
+
+
+
+<%= link_to "ユーザー一覧へ", users_path %>
+
+
+    <%= image_tag t.image_url, size: "250x200" if t.image? %>
+    
+      <%= t.name %>
+      <%= t.category %>
+      <%= t.question %>
+      <%= t.image %>
+      <%= t.user_id %>
+      <%= link_to "詳細へ", tweet_path(t.id) %>
+
+      <% if user_signed_in? && current_user.id == t.user_id %>
+      <%= link_to "編集する", edit_tweet_path(t.id) %>
+      <%= button_to "削除する", tweet_path(t.id), method: :delete %>
+    <% end %> 
+
+     
+    </div>
+
+  <% end %>
+  </div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,49 @@
+<link rel="stylesheet" type="text/css" href="stylesheets/sinnki.scss">
+
+<div class="top">
+
+<div class="title">
+  <h2>hommapet</h2>
+  </div>
+
+  <h3>新規投稿</h3>
+  <%= form_for @tweet do |f| %>
+
+<div class="cover-new">  
+  <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name, :size => 30 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :category %>
+      <%= f.select :category,
+      [["犬", "犬"], 
+      ["猫", "猫"],
+      ["うさぎ", "うさぎ"],
+      ["鳥", "鳥"],
+      ["ハムスター", "ハムスター"],
+      ["その他", "その他"]], include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :question %>
+      <%= f.text_area :question, :size => "30x2" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+    </div>
+
+
+    <%= f.submit "投稿する" %>
+  <% end %>
+
+  <%= link_to "一覧に戻る", tweets_path %>
+
+  Aioi2025@
+
+</div>
+
+</div>
